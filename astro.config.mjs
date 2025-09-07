@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://bluefoxtours.cz', // Replace with your site URL
+  trailingSlash: 'always',
   integrations: [
     tailwind(),
     sitemap(),
