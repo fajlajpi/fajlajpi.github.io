@@ -1,17 +1,23 @@
 ---
-// Define the navigation items
+// Define the navigation items with absolute paths and trailing slashes
 const navItems = [
-  { text: "Home", href: "./" },
-  { text: "About Us", href: "./about-us" },
-  { text: "Tours", href: "./tours" },
-  { text: "Blog", href: "./blog" },
-  { text: "Tips", href: "./tips" },
-  { text: "FAQ", href: "./faq" },
-  { text: "Contact", href: "./contact" },
+  { text: "Home", href: "/" },
+  { text: "About Us", href: "/about-us/" },
+  { text: "Tours", href: "/tours/" },
+  { text: "Blog", href: "/blog/" },
+  { text: "Tips", href: "/tips/" },
+  { text: "FAQ", href: "/faq/" },
+  { text: "Contact", href: "/contact/" },
 ];
 
 // Get the current URL path to highlight the active link
 const currentPath = Astro.url.pathname;
+
+// Helper function to normalize paths for comparison
+const normalizePath = (path: string) => {
+  if (path === '/') return path;
+  return path.endsWith('/') ? path : path + '/';
+};
 ---
 
 <!-- Desktop Navigation -->
@@ -19,8 +25,10 @@ const currentPath = Astro.url.pathname;
   <ul class="flex items-center space-x-6">
     {
       navItems.map((item) => {
-        const isActive = currentPath === item.href || 
-                         (item.href !== "/" && currentPath.startsWith(item.href));
+        const normalizedCurrent = normalizePath(currentPath);
+        const normalizedHref = normalizePath(item.href);
+        const isActive = normalizedCurrent === normalizedHref || 
+                         (normalizedHref !== "/" && normalizedCurrent.startsWith(normalizedHref));
         
         return (
           <li>
@@ -65,8 +73,10 @@ const currentPath = Astro.url.pathname;
     <div class="grid grid-cols-2 gap-3">
       {
         navItems.map((item) => {
-          const isActive = currentPath === item.href || 
-                           (item.href !== "/" && currentPath.startsWith(item.href));
+          const normalizedCurrent = normalizePath(currentPath);
+          const normalizedHref = normalizePath(item.href);
+          const isActive = normalizedCurrent === normalizedHref || 
+                           (normalizedHref !== "/" && normalizedCurrent.startsWith(normalizedHref));
           
           return (
             <a
