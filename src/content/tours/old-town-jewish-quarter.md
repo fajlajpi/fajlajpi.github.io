@@ -6,7 +6,7 @@ tourType: "Historical"
 duration: "3 hours"
 price: 40
 audioUrl: "https://www.google.com/"
-image: "/uploads/tours/ot-jq.webp"
+image: "/uploads/tours/ot-jq.jpg"
 summary: "Discover the essential historic parts of Prague's historic centre."
 tags: ["walking", "historical", "downtown"]
 draft: false
