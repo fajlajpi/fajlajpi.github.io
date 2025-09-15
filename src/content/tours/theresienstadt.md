@@ -1,6 +1,6 @@
 ---
 title: "Former Ghetto Theresienstadt & The Small Fortress"
-date: 2025-01-15
+date: 2025-01-11
 guide: "Filip H."
 tourType: "Twentieth Century"
 duration: "7 hours"

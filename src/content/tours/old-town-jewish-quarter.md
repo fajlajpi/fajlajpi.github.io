@@ -1,6 +1,6 @@
 ---
 title: "Prague Essentials: Old Town & Jewish Quarter"
-date: 2025-01-15
+date: 2025-01-25
 guide: "Filip H."
 tourType: "Historical"
 duration: "3 hours"

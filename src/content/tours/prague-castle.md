@@ -1,6 +1,6 @@
 ---
 title: "Prague Essentials: Prague Castle"
-date: 2025-01-15
+date: 2025-01-23
 guide: "Filip H."
 tourType: "Historical"
 duration: "3 hours"
