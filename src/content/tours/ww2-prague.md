@@ -2,7 +2,7 @@
 title: "20th Century: Second World War in Prague"
 date: 2025-01-11
 guide: "Filip H."
-tourType: "Historical"
+tourType: "Twentieth Century"
 duration: "2 hours"
 price: 30
 audioUrl: "https://www.google.com/"

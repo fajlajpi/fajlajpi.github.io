@@ -2,9 +2,9 @@
 title: "20th Century: Prague Under Communism"
 date: 2025-01-10
 guide: "Filip H."
-tourType: "Historical"
-duration: "3 hours"
-price: 40
+tourType: "Twentieth Century"
+duration: "2 hours"
+price: 30
 audioUrl: "https://www.google.com/"
 image: "/uploads/tours/communist-prague.jpg"
 summary: "Peek behind the Iron Curtain and find a side of Prague often overlooked"
