@@ -7,7 +7,7 @@ duration: "2 hours"
 price: 30
 audioUrl: "https://www.google.com/"
 image: "/uploads/tours/castle-ww2.jpg"
-summary: "Occupied, but never broken. Understand the struggles of Prague and its people during the Second World War."
+summary: "Occupied, but never broken. Understand the struggles of Prague and its people during the Second World War, along with the necessary context of how we got there and where it led us after the war was over."
 tags: ["walking", "20th century", "downtown"]
 draft: false
 ---

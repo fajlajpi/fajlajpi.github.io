@@ -7,7 +7,7 @@ duration: "7 hours"
 price: 120
 audioUrl: "https://www.google.com/"
 image: "/uploads/tours/theresienstadt.jpg"
-summary: "Part of the Holocaust masquerading as an idylic community in an old Austrian military fortress."
+summary: "Theresienstadt is a historic site like no other. Part of the Holocaust masquerading as an idylic community in an old Austrian military fortress, it beggars belief and reveals a unique perspective."
 tags: ["day tour", "20th century", "world war two"]
 draft: false
 ---

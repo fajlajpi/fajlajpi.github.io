@@ -7,7 +7,7 @@ duration: "2 hours"
 price: 30
 audioUrl: "https://www.google.com/"
 image: "/uploads/tours/communist-prague.jpg"
-summary: "Peek behind the Iron Curtain and find a side of Prague often overlooked"
+summary: "Peek behind the Iron Curtain and find a side of Prague often overlooked. Many people shy away from the most recent parts of history, when those define us more than any other. Get an insight into one country's life under the Communist rule."
 tags: ["walking", "20th century", "downtown"]
 draft: false
 ---
