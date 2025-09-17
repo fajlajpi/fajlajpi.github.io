@@ -14,7 +14,7 @@ export interface Props {
   date?: Date;
   author?: string;
   tags?: string[];
-  type?: "sermon" | "event" | "blog" | "ministry";
+  type?: "tour" | "event" | "blog" | "ministry";
 }
 
 const {
@@ -30,8 +30,8 @@ const {
 const seoType = "article";
 
 let pageTitle = title;
-if (type === "sermon") {
-  pageTitle = `Sermon: ${title}`;
+if (type === "tour") {
+  pageTitle = `Tour: ${title}`;
 } else if (type === "event") {
   pageTitle = `Event: ${title}`;
 } else if (type === "ministry") {
