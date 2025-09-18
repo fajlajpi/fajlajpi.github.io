@@ -20,12 +20,12 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))];
 ---
 
 <BaseLayout
-  title="Blog - Church Name"
-  description="Read our latest articles, devotionals, and updates from our church community."
+  title="Blog - Blue Fox Tours"
+  description="Read interesting facts and details about Prague and the Czech Republic. All the little bits that either make up the tours, or don't fit into them."
 >
   <PageHeader 
     title="Blog" 
-    subtitle="Insights, devotionals, and updates from our church community"
+    subtitle="Facts and stories about Prague and the Czech Republic."
     backgroundImage="/uploads/blog-header-bg.webp"
   />
   
@@ -122,7 +122,7 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))];
                   src: post.data.image.url,
                   alt: post.data.image.alt
                 }}
-                href={`/blog/${post.slug}`}
+                href={`/blog/${post.slug}/`}
                 className="blog-card"
                 data-tags={post.data.tags.join(',')}
                 data-author={post.data.author}
