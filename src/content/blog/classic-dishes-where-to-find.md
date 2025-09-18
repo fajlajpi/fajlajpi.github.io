@@ -1,6 +1,6 @@
 ---
 title: "Classic Dishes and Where to Find Them"
-slug: "classic-dishes-where-to-find"
+slug: "classic-dishes"
 pubDate: 2025-01-20
 description: "What are the most iconic dishes of the Czech Republic? And where would I go to try them out?"
 author: "Filip H."
