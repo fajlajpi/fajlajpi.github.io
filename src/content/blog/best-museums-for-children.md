@@ -5,8 +5,8 @@ pubDate: 2025-01-21
 description: "Avoid a family disaster by picking a museum that's fantastic for adults and children alike. We have plenty!"
 author: "Filip H."
 image: {
-  url: "/uploads/blog/placeholder.jpg",
-  alt: "Placeholder image"
+  url: "/uploads/blog/museum-with-children.jpg",
+  alt: "Child playing in the Museum of Agriculture"
 }
 tags: ["recommendations", "children"]
 draft: false

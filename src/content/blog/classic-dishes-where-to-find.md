@@ -5,8 +5,8 @@ pubDate: 2025-01-20
 description: "What are the most iconic dishes of the Czech Republic? And where would I go to try them out?"
 author: "Filip H."
 image: {
-  url: "/uploads/blog/placeholder.jpg",
-  alt: "Placeholder image"
+  url: "/uploads/blog/beef-cream-sauce.jpg",
+  alt: "Beef sirloin in cream sauce with bread dumplings"
 }
 tags: ["food", "recommendations", "culture"]
 draft: false
