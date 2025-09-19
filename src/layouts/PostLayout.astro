@@ -43,7 +43,11 @@ const formattedDate = date ? formatDate(date) : null;
 
 <!-- SEO props diteruskan oleh BaseLayout -->
 <!-- Header & Footer hanya dipanggil sekali oleh BaseLayout -->
-<PageHeader title={title} />
+<PageHeader 
+  title={title}
+  subtitle={description}
+  backgroundImage="/uploads/blog-header-bg.jpg"
+/>
 
 <main class="container py-8">
   <div class="mx-auto max-w-3xl">
