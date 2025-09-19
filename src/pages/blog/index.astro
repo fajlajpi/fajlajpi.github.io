@@ -111,7 +111,7 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))];
                   src: post.data.image.url,
                   alt: post.data.image.alt
                 }}
-                href={`/blog/${post.slug}`}
+                href={`/blog/${post.slug}/`}
                 className="blog-card"
                 data-tags={post.data.tags.join(',')}
                 data-author={post.data.author}
