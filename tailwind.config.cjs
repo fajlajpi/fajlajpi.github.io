@@ -44,7 +44,7 @@ module.exports = {
           900: '#7c2d12',
           950: '#431407',
         },
-        cobalt: {
+        blue: {
           50: '#ebf8ff',
           100: '#d1f1ff',
           200: '#aee6ff',
