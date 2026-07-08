@@ -1,4 +1,11 @@
 ---
+// Seo.astro — Blue Fox Tours
+// NOTE: The original template used ${...} interpolation inside a plain
+// <script type="application/ld+json"> block. Astro does NOT interpolate
+// there, so the site was emitting literal "${churchInfo.name}" strings —
+// invalid JSON-LD. This version serializes real objects with JSON.stringify
+// and injects them via set:html, which is the correct Astro pattern.
+
 export interface Props {
   title: string;
   description: string;
@@ -8,36 +15,95 @@ export interface Props {
   };
   type?: "website" | "article";
   canonicalUrl?: string;
+  /** Optional extra JSON-LD objects (e.g. TouristTrip from a tour page) */
+  structuredData?: object[];
 }
 
 const {
   title,
   description,
   image = {
-    url: "/uploads/church-default.webp",
-    alt: "Church Name",
+    url: "/uploads/bluefox-thumb.png",
+    alt: "Blue Fox Tours",
   },
   type = "website",
   canonicalUrl,
+  structuredData = [],
 } = Astro.props;
 
-// Get the canonical URL
 const canonicalURL = canonicalUrl || new URL(Astro.url.pathname, Astro.site);
 
-// Get Church address and contact info (would come from site config in a real implementation)
-const churchInfo = {
-  name: "Church Name",
-  address: {
-    streetAddress: "123 Main Street",
-    addressLocality: "Anytown",
-    addressRegion: "ST",
-    postalCode: "12345",
-    addressCountry: "US",
-  },
-  telephone: "+1-555-123-4567",
-  email: "info@churchname.org",
-  url: Astro.site?.toString() || "https://example.com",
+// ── Business info ────────────────────────────────────────────────────────
+// IMPORTANT: name / address / phone must match your Google Business Profile
+// EXACTLY (same spelling, same formatting). Fill in the TODOs before deploy.
+const business = {
+  name: "Blue Fox Tours",
+  legalName: "Filip Huta",
+  addressLocality: "Prague",
+  addressCountry: "CZ",
+  telephone: "+420773537656",
+  email: "info@bluefoxtours.cz",
+  url: Astro.site?.toString() || "https://bluefoxtours.cz",
+  image: new URL(image.url, Astro.site).toString(),
+  priceRange: "€€€",
 };
+
+// Site-wide LocalBusiness schema. schema.org has no "TourOperator" type;
+// TravelAgency is the accepted type for tour operators and what Google's
+// documentation examples use for this category.
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "TravelAgency"],
+  "@id": `${business.url}#business`,
+  name: business.name,
+  description:
+    "Private walking tours of Prague and day trips to Theresienstadt (Terezín), led by a licensed local guide with 15 years of experience.",
+  telephone: business.telephone,
+  email: business.email,
+  url: business.url,
+  image: business.image,
+  priceRange: business.priceRange,
+  areaServed: [
+    { "@type": "City", name: "Prague" },
+    { "@type": "City", name: "Terezín" },
+  ],
+  founder: {
+    "@type": "Person",
+    name: "Filip Huta",
+    jobTitle: "Licensed Tour Guide",
+  },
+  knowsLanguage: ["en", "cs"],
+};
+
+const articleSchema =
+  type === "article"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: title,
+        image: new URL(image.url, Astro.site).toString(),
+        description: description,
+        publisher: {
+          "@type": "Organization",
+          name: business.name,
+          logo: {
+            "@type": "ImageObject",
+            url: new URL("/uploads/bluefox.png", Astro.site).toString(),
+          },
+        },
+        url: canonicalURL.toString(),
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": canonicalURL.toString(),
+        },
+      }
+    : null;
+
+const allSchemas = [
+  localBusinessSchema,
+  ...(articleSchema ? [articleSchema] : []),
+  ...structuredData,
+];
 ---
 
 <!-- Basic SEO -->
@@ -52,6 +118,8 @@ const churchInfo = {
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image.url, Astro.site)} />
 <meta property="og:image:alt" content={image.alt} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Blue Fox Tours" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -61,49 +129,9 @@ const churchInfo = {
 <meta property="twitter:image" content={new URL(image.url, Astro.site)} />
 <meta property="twitter:image:alt" content={image.alt} />
 
-<!-- JSON-LD Schema for Church -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Church",
-    "name": "${churchInfo.name}",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "${churchInfo.address.streetAddress}",
-      "addressLocality": "${churchInfo.address.addressLocality}",
-      "addressRegion": "${churchInfo.address.addressRegion}",
-      "postalCode": "${churchInfo.address.postalCode}",
-      "addressCountry": "${churchInfo.address.addressCountry}"
-    },
-    "telephone": "${churchInfo.telephone}",
-    "email": "${churchInfo.email}",
-    "url": "${churchInfo.url}"
-  }
-</script>
-
+<!-- JSON-LD structured data (valid serialization) -->
 {
-  type === "article" && (
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "${title}",
-        "image": "${new URL(image.url, Astro.site)}",
-        "description": "${description}",
-        "publisher": {
-          "@type": "Organization",
-          "name": "${churchInfo.name}",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "${new URL("/uploads/logo.png", Astro.site)}"
-          }
-        },
-        "url": "${canonicalURL}",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "${canonicalURL}"
-        }
-      }
-    </script>
-  )
+  allSchemas.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))
 }

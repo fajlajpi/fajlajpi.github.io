@@ -9,7 +9,7 @@ audioUrl: "https://www.google.com/"
 image: "/uploads/tours/prague-castle.jpg"
 summary: "The world's largest medieval castle complex has been home to Dukes, Kings, Emperors and now Presidents. Explore the richly layered history with us and gain an understanding of the heart of power of Bohemia."
 tags: ["walking", "historical", "downtown"]
-draft: false
+draft: true
 ---
 
 ## Tour Overview

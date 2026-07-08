@@ -26,6 +26,31 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
+// Build TouristTrip structured data for this tour
+const siteUrl = Astro.site?.toString() || "https://bluefoxtours.cz";
+const tourSchema = {
+  "@context": "https://schema.org",
+  "@type": "TouristTrip",
+  name: entry.data.title,
+  description: entry.data.summary,
+  image: entry.data.image ? new URL(entry.data.image, Astro.site).toString() : undefined,
+  touristType: "Private group",
+  provider: { "@id": `${siteUrl}#business` },
+  offers: entry.data.pricingTiers?.length
+    ? {
+        "@type": "AggregateOffer",
+        priceCurrency: "EUR",
+        lowPrice: Math.min(...entry.data.pricingTiers.map((t) => t.price)),
+        highPrice: Math.max(...entry.data.pricingTiers.map((t) => t.price)),
+        offerCount: entry.data.pricingTiers.length,
+      }
+    : {
+        "@type": "Offer",
+        priceCurrency: "EUR",
+        price: entry.data.price,
+      },
+};
+
 // Format the date for display
 const formattedDate = formatDate(entry.data.date);
 
@@ -51,9 +76,9 @@ if (entry.data.tourType) {
 
 <BaseLayout
   title={`${entry.data.title} - Tours - Blue Fox Tours`}
-  description={entry.data.summary || `Listen to "${entry.data.title}" by ${entry.data.speaker}`}
-  image={entry.data.image ? { url: entry.data.image, alt: entry.data.title } : undefined}
+  description={entry.data.summary || `${entry.data.title} – a private tour by Blue Fox Tours, Prague.`}  image={entry.data.image ? { url: entry.data.image, alt: entry.data.title } : undefined}
   type="article"
+  structuredData={[tourSchema]}
 >
   <PostLayout
     title={entry.data.title}

@@ -1,43 +1,67 @@
 ---
-title: "Prague Essentials: Old Town & Jewish Quarter"
-date: 2025-01-25
+title: "Prague Old Town, Jewish Quarter & Charles Bridge – Private Walking Tour"
+date: 2026-07-08
 guide: "Filip H."
-tourType: "Historical"
+tourType: "Prague Essentials"
 duration: "3 hours"
-price: 40
-audioUrl: "https://www.google.com/"
-image: "/uploads/tours/ot-jq.jpg"
-summary: "Discover the essential historic parts of Prague's historic centre. A great introductory tour, it should be the top of your list if you want to get the most out of Prague. Mixing culture, history, tradition with a personal touch."
-tags: ["walking", "historical", "downtown"]
+price: 150
+pricingTiers:
+  - label: "1–2 people"
+    price: 150
+  - label: "3–4 people"
+    price: 190
+  - label: "5–6 people"
+    price: 220
+priceIncludes:
+  - "Private licensed guide for your group only"
+  - "Personalized route and pacing"
+  - "Local recommendations for the rest of your stay"
+meetingPoint: "Old Town Square, corner of Pařížská, in front of Cartier"
+image: "/uploads/tours/old-town-jewish-quarter.jpg"
+summary: "The heart of Prague in three hours, privately, with a guide who was born here. Old Town, the Jewish Quarter, and Charles Bridge – history, stories, and the practical tips that make the rest of your trip better."
+tags: ["private tour", "walking", "old town", "jewish quarter", "charles bridge"]
 draft: false
 ---
 
 ## Tour Overview
 
-Join us for an engaging walk through the downtowns most historial neighborhoods, the Old Town and the Jewish Quarter or Josefov. This tour is perfect for your first impression of the city, it requires no prior knowledge and instead sets you up for an enjoyable time getting the most of the city.
+This is the tour I would want on my first day in Prague. In three hours, we cover the two most historic neighborhoods on this side of the river and finish on Charles Bridge – and because it's private, we do it at your pace, around your interests, without waiting for thirty strangers to regroup.
 
-Perfect for anyone of any age, with a pleasant walk of about 3 kilometers (2 miles) spread over three hours, with a quick break in the middle.
+I was born in Prague, and I've been guiding here since 2010. You'll get the history – a thousand years of it, from Duke Wenceslas to the Velvet Revolution – but you'll also get the city as locals live it: where to eat, what to skip, how to say thank you in Czech, and why we're like this. My tours are story-driven and factual, and I promise you'll laugh more than you expect to on a history tour.
 
 ### Sites visited
-- Wenceslas Square
-- Old Town Square
-- Astronomical Clock
-- Jan Hus Monument
+
+- Old Town Square and the Astronomical Clock
 - Church of Our Lady before Týn
-- Estates Theatre
-- House of the Black Madonna
-- Spanish Synagogue
-- Old-New Synagogue
-- Old Jewish Cemetery
-- Pinkas Synagogue
-- Jan Palach Square
-- Rudolfinum Concert Hall
+- Ungelt courtyard and the Church of Saint James
+- The Jewish Quarter: Old-New Synagogue, Jewish Town Hall, and the cemetery walls
+- Rudolfinum and the Vltava embankment
+- Charles Bridge
 
 ### Topics covered
-- History of Bohemia from its origins to the late 20th century
-- Local culture and authentic food and drinks
-- Detailed understanding of the Astronomical Clock
-- Musical connections of Prague in the 18th century
-- National identity and its origins
-- History of the Jewish people in Bohemia
-- Recommendations for your next steps in Prague
+
+- How a small provincial town became the seat of the Holy Roman Empire
+- A thousand years of Jewish life in Prague – the Golem included
+- Defenestrations, revolutions, and why our history keeps happening in squares
+- Architecture from Romanesque cellars to Art Nouveau facades
+- Honest, local recommendations: food, beer, day trips, and tourist traps to avoid
+
+### Good to know
+
+- Fully private – just your group and me
+- Comfortable pace, cobblestone-friendly route, plenty of chances to sit or grab a coffee
+- Children welcome – I have two of my own and I know how to keep them entertained
+
+## Pricing
+
+Prices are **per group**, not per person:
+
+| Group size | Price |
+|------------|-------|
+| 1–2 people | €150 |
+| 3–4 people | €190 |
+| 5–6 people | €220 |
+
+Larger group? [Get in touch](/contact/) and we'll work something out.
+
+**[Request this tour →](/contact/)** I reply within 24 hours.

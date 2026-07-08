@@ -9,7 +9,7 @@ audioUrl: "https://www.google.com/"
 image: "/uploads/tours/childrens-tour.jpg"
 summary: "When travelling with children, most walking tours can fall on deaf ears. This tour was designed with children in mind, to help them enjoy their time in the city just as much as their parents might."
 tags: ["walking", "historical", "specialty"]
-draft: false
+draft: true
 ---
 
 ## Tour Overview
