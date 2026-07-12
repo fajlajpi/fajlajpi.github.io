@@ -47,6 +47,12 @@
     @apply px-4 mx-auto max-w-7xl;
   }
 
+  /* Vertical spacing applied to every page section.
+     Change this one value to adjust the gap between all sections. */
+  .section-y {
+    @apply py-10;
+  }
+
   .btn {
     @apply inline-flex items-center justify-center px-5 py-3 text-base font-medium transition-all rounded-md shadow-sm;
   }
