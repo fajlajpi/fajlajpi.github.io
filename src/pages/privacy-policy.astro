@@ -1,0 +1,127 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/Sections/PageHeader.astro";
+
+const lastUpdated = "12 July 2026";
+---
+
+<BaseLayout
+  title="Privacy Policy - Blue Fox Tours"
+  description="How I handle your personal data"
+>
+  <PageHeader
+    title="Privacy Policy"
+    subtitle="How I handle your personal data"
+    backgroundImage="/uploads/tours-header-bg.jpg"
+  />
+
+  <section class="section-y">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm text-gray-500 mb-8"><em>Last updated: {lastUpdated}</em></p>
+
+        <p class="text-l text-gray-700 mb-10">
+          I keep this simple, because the data I work with is simple: I'm a one-person tour business,
+          and I only process the personal data I need to answer your inquiry and run your tour.
+        </p>
+
+        <h2 class="text-xl md:text-2xl font-bold mb-4">1. Who is responsible for your data</h2>
+        <p class="text-l text-gray-700 mb-2">The data controller is:</p>
+        <p class="text-l text-gray-700 mb-10">
+          <strong>Filip Huta – Blue Fox Tours</strong><br />
+          Registered address: TODO_ADDRESS<br />
+          IČO (Business ID): TODO_ICO<br />
+          Email: <a href="mailto:info@bluefoxtours.cz" class="text-primary-600 hover:text-primary-700">info@bluefoxtours.cz</a><br />
+          Phone: <a href="tel:+420773537656" class="text-primary-600 hover:text-primary-700">+420 773 537 656</a>
+        </p>
+
+        <h2 class="text-xl md:text-2xl font-bold mb-4">2. What data I collect and why</h2>
+        <p class="text-l text-gray-700 mb-6">
+          <strong>Booking requests and inquiries</strong> (via the contact form, email, or WhatsApp):
+          your name, email address, preferred date, group size, chosen tour, and anything you write in
+          your message. I use this to reply to you, confirm availability, and arrange your tour.
+          Legal basis: performance of a contract, or steps taken at your request before entering into
+          one (Art. 6(1)(b) GDPR).
+        </p>
+        <p class="text-l text-gray-700 mb-6">
+          <strong>Tour-related details you volunteer</strong>: things like mobility considerations or
+          children's ages, which help me tailor the tour. Legal basis: performance of a contract.
+        </p>
+        <p class="text-l text-gray-700 mb-6">
+          <strong>Allergy and dietary information</strong> (Prague with Children Tour): because this
+          tour includes snacks, I ask parents about allergies and dietary restrictions. This is
+          health-related data, so I process it only with your explicit consent (Art. 9(2)(a) GDPR),
+          use it solely to choose safe snacks for your tour, and delete it after the tour takes place.
+          You can withdraw consent at any time before the tour; in that case, no snacks will be offered.
+        </p>
+        <p class="text-l text-gray-700 mb-6">
+          <strong>Payment data</strong>: card payments are processed by SumUp. I never see or store
+          your card details — I receive only a confirmation that payment was made. Cash payments
+          involve no data processing at all.
+        </p>
+        <p class="text-l text-gray-700 mb-6">
+          <strong>Invoicing and accounting records</strong>: name and billing details on receipts and
+          invoices. Legal basis: legal obligation (Art. 6(1)(c) GDPR) under Czech accounting and tax law.
+        </p>
+        <p class="text-l text-gray-700 mb-10">
+          I do not use your data for marketing, I do not send newsletters, and I never sell or share
+          your data for advertising.
+        </p>
+
+        <h2 class="text-xl md:text-2xl font-bold mb-4">3. Who else touches the data</h2>
+        <p class="text-l text-gray-700 mb-4">
+          I use a small number of service providers (processors) to run this website and business:
+        </p>
+        <ul class="list-disc pl-6 text-l text-gray-700 mb-6 space-y-2">
+          <li>
+            <strong>Formspree, Inc.</strong> (USA) — delivers contact-form submissions to my email.
+            Transfers to the USA are covered by the EU–US Data Privacy Framework and/or Standard
+            Contractual Clauses.
+          </li>
+          <li><strong>TODO_HOSTING_PROVIDER</strong> — hosts this website.</li>
+          <li><strong>TODO_EMAIL_PROVIDER</strong> — my email service.</li>
+          <li><strong>SumUp Limited</strong> (Ireland) — card payment processing.</li>
+        </ul>
+        <p class="text-l text-gray-700 mb-10">
+          If you book my tours through third-party platforms (such as Viator or GetYourGuide), those
+          platforms are independent data controllers, and their own privacy policies apply to the data
+          you give them.
+        </p>
+
+        <h2 class="text-xl md:text-2xl font-bold mb-4">4. How long I keep it</h2>
+        <p class="text-l text-gray-700 mb-10">
+          Inquiries that don't lead to a booking: deleted no later than one year after our last contact.
+          Booking correspondence: kept up to three years after your tour (the limitation period for
+          potential claims). Accounting and tax records: retained for the period required by Czech law.
+          Children's allergy information: deleted after the tour.
+        </p>
+
+        <h2 class="text-xl md:text-2xl font-bold mb-4">5. Cookies</h2>
+        <p class="text-l text-gray-700 mb-10">
+          This website sets no tracking or analytics cookies and uses no advertising technology. There
+          is nothing to consent to, which is why you don't see a cookie banner.
+        </p>
+
+        <h2 class="text-xl md:text-2xl font-bold mb-4">6. Your rights</h2>
+        <p class="text-l text-gray-700 mb-6">
+          Under the GDPR you have the right to access your data, correct it, have it erased, restrict
+          its processing, object to processing, receive it in a portable format, and withdraw any
+          consent you've given. To exercise any of these, just email me at
+          <a href="mailto:info@bluefoxtours.cz" class="text-primary-600 hover:text-primary-700">info@bluefoxtours.cz</a>
+          — I'm the only person who will handle your request, and I'll respond within one month.
+        </p>
+        <p class="text-l text-gray-700 mb-10">
+          You also have the right to lodge a complaint with the Czech supervisory authority:
+          <strong>Úřad pro ochranu osobních údajů (ÚOOÚ)</strong>, Pplk. Sochora 27, 170 00 Praha 7,
+          <a href="https://www.uoou.gov.cz" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700">www.uoou.gov.cz</a>.
+        </p>
+
+        <h2 class="text-xl md:text-2xl font-bold mb-4">7. Changes</h2>
+        <p class="text-l text-gray-700">
+          If I change how I handle personal data (for example, by adding analytics or a newsletter),
+          I will update this policy and the date above before the change takes effect.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
