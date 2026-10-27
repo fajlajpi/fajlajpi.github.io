@@ -13,7 +13,7 @@ priceIncludes:
   - "Private licensed guide for your group only"
   - "Personalized route and pacing"
   - "Local recommendations for the rest of your stay"
-meetingPoint: "Wenceslas Square, under the statue of Saint Wenceslas"
+meetingPoint: "Národní divadlo tram stop, behind the National Theatre by the Legion Bridge"
 image: "/uploads/tours/castle-ww2.jpg"
 summary: "From the legionnaires of 1918 to Munich, the paratroopers' crypt and the 1948 takeover. A private walk through occupied Prague, on the streets where it happened."
 tags: ["private tour", "walking", "20th century", "world war two", "anthropoid"]
@@ -29,12 +29,12 @@ My great-grandfather fought in the First World War as a Czechoslovak legionnaire
 
 ### Sites visited
 
-- Wenceslas Square
-- Petschek Palace, the former Gestapo headquarters
-- Main Train Station and the Nicholas Winton memorial
-- Church of Saints Cyril and Methodius, and the crypt where the paratroopers made their last stand
+- The Legion Bridge (Most Legií), named after the Czechoslovak Legions
+- The National Theatre
 - The Dancing House, built on a site bombed in 1945
+- Church of Saints Cyril and Methodius, and the crypt where the paratroopers made their last stand
 - Places connected to the Heydrich assassination
+- Emmaus Monastery, hit in the bombing of February 1945
 
 ### Topics covered
 

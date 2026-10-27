@@ -53,6 +53,7 @@ We start at the top of the hill and walk mostly downhill through the courtyards.
 ### Good to know
 
 - Fully private, just your group and me
+- Getting to Pohořelec: from Malostranská metro station (line A), take tram 22 uphill to the Pohořelec stop (about 10 minutes). From Hradčanská metro station (line A), it's about a 20-minute walk
 - There is an airport-style security check at the Castle entrances, so leave large bags at the hotel
 - Interior tickets are not included (optional)
 - Suitable for all ages

@@ -13,7 +13,7 @@ priceIncludes:
   - "Private licensed guide for your group only"
   - "Personalized route and pacing"
   - "Local recommendations for the rest of your stay"
-meetingPoint: "John Lennon Wall, Velkopřevorské Square (Malá Strana)"
+meetingPoint: "Wenceslas Square, under the statue of Saint Wenceslas"
 image: "/uploads/tours/communist-prague.jpg"
 summary: "41 years behind the Iron Curtain, from the 1948 coup to the Velvet Revolution, on the streets where it happened. A private walk with a guide born in the year it all ended."
 tags: ["private tour", "walking", "20th century", "communism", "velvet revolution"]
@@ -31,13 +31,13 @@ This tour isn't a list of dates, and it isn't a lecture on how evil the regime w
 
 ### Sites visited
 
-- John Lennon Wall
-- Václav Havel Piazzetta
-- Národní třída and the 17 November memorial
-- Wenceslas Square
-- Former and current Communist Party headquarters
+- Wenceslas Square and the Jan Palach memorial
+- Politických vězňů Street and the current Communist Party headquarters
 - Czech National Bank
-- Jan Palach memorial
+- Republic Square
+- Old Town Square, where Gottwald announced the 1948 takeover
+- Můstek
+- Národní třída and the 17 November memorial
 
 ### Topics covered
 
