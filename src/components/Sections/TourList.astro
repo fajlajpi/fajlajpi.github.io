@@ -9,7 +9,7 @@ export interface Props {
   showViewAll?: boolean;
 }
 
-const { count = 4, showViewAll = true } = Astro.props;
+const { count = 6, showViewAll = true } = Astro.props;
 
 const allTours = await getCollection("tours", ({ data }) => {
   return import.meta.env.PROD ? !data.draft : true;
@@ -18,7 +18,7 @@ const allTours = await getCollection("tours", ({ data }) => {
 const tours = allTours.sort(byOrder).slice(0, count);
 ---
 
-<section class="section-y bg-white">
+<section class="section-y">
   <div class="container">
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Private tours</h2>
@@ -27,7 +27,7 @@ const tours = allTours.sort(byOrder).slice(0, count);
       </p>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {tours.map((tour) => {
         return (
         <Card
@@ -67,7 +67,7 @@ const tours = allTours.sort(byOrder).slice(0, count);
     {showViewAll && tours.length > 0 && (
       <div class="mt-12 text-center">
         <Button href="/tours/" variant="outline">
-          All tours, including family and Old Town tours
+          Compare all tours
         </Button>
       </div>
     )}

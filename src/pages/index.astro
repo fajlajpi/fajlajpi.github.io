@@ -3,12 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSection from "../components/Sections/HeroSection.astro";
 import TourList from "../components/Sections/TourList.astro";
 import Button from "../components/UI/Button.astro";
+import TrustPoints from "../components/UI/TrustPoints.astro";
 import CTASection from "../components/Sections/CTASection.astro";
 
 ---
 
 <BaseLayout>
-  <HeroSection 
+  <HeroSection
     title="Know Prague like an old friend"
     subtitle="Private tours with a native, licensed guide. Specialising in Prague's 20th century, and the stories my family lived to tell."
     backgroundImage="/uploads/hero-prg.jpg"
@@ -17,7 +18,66 @@ import CTASection from "../components/Sections/CTASection.astro";
     secondaryCtaText="About your guide"
     secondaryCtaLink="/about/"
   />
-  
+
+  <!-- Meet the guide + booking reassurances -->
+  <section class="section-y bg-white">
+    <div class="container">
+      <div class="flex flex-col sm:flex-row items-center gap-6 max-w-4xl mx-auto mb-10 text-center sm:text-left">
+        <img
+          src="/uploads/filip-portrait.jpg"
+          alt="Filip Huta, your guide"
+          width="400"
+          height="400"
+          class="w-28 h-28 rounded-full object-cover shadow-md flex-shrink-0"
+        />
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold mb-2">Hi, I'm Filip</h2>
+          <p class="text-lg text-gray-700">
+            I was born in Prague and I've been guiding here since 2010. Every tour is private, so it's just you and me, at your pace, with the stories that make this city what it is.
+          </p>
+        </div>
+      </div>
+      <div class="max-w-5xl mx-auto">
+        <TrustPoints layout="row" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Tours Selection Section -->
+  <TourList />
+
+  <!-- About Section -->
+  <section class="section-y bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <img
+            src="/uploads/about-guide.jpg"
+            alt="Filip Huta guiding at Prague Castle"
+            width="1920"
+            height="1280"
+            loading="lazy"
+            class="rounded-lg shadow-lg object-cover w-full h-full"
+          />
+        </div>
+
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
+          <p class="text-gray-700 mb-6 text-lg">
+            I am a Prague native with 15 years of experience as a tour guide, but my love for Prague and our history goes back way further. My great-grandfather fought in the First World War as a Czechoslovak legionnaire, and I was a baby when the Velvet Revolution began on 17 November 1989. Here, the 20th century is family history.
+          </p>
+          <p class="text-gray-700 mb-8 text-lg">
+            My tours are entertaining, factual, and with a story thread running through them. My aim is to help you know the city through and through using our stories, legends, culture and traditions.
+          </p>
+
+          <Button href="/about/">
+            Learn More About Me
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Blue Fox Explanation & Quote -->
   <section class="section-y">
     <div class="container">
@@ -34,44 +94,9 @@ import CTASection from "../components/Sections/CTASection.astro";
       </div>
     </div>
   </section>
-  
-  <!-- About Section -->
-  <section class="section-y bg-gray-50">
-    <div class="container">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
-          <img 
-            src="/uploads/about-guide.jpg" 
-            alt="Filip Huta guiding at Prague Castle"
-            width="1920"
-            height="1280"
-            loading="lazy" 
-            class="rounded-lg shadow-lg object-cover w-full h-full"
-          />
-        </div>
-        
-        <div>
-          <h2 class="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
-          <p class="text-gray-700 mb-6 text-lg">
-            I am a Prague native with 15 years of experience as a tour guide, but my love for Prague and our history goes back way further. My great-grandfather fought in the First World War as a Czechoslovak legionnaire, and I was a baby when the Velvet Revolution began on 17 November 1989. Here, the 20th century is family history.
-          </p>
-          <p class="text-gray-700 mb-8 text-lg">
-            My tours are entertaining, factual, and with a story thread running through them. My aim is to help you know the city through and through using our stories, legends, culture and traditions.
-          </p>
-          
-          <Button href="/about/">
-            Learn More About Me
-          </Button>
-        </div>
-      </div>
-    </div>
-  </section>
-    
-  <!-- Tours Selection Section -->
-  <TourList />
-  
+
   <!-- Call to Action -->
-  <CTASection 
+  <CTASection
     title="Ready to join a tour?"
     subtitle="Pick from established tours, or get a custom tour tailored to your interests."
     backgroundImage="/uploads/hero-prg.jpg"

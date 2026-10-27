@@ -1,231 +1,200 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import PostLayout from "../../layouts/PostLayout.astro";
+import PageHeader from "../../components/Sections/PageHeader.astro";
 import Button from "../../components/UI/Button.astro";
+import TrustPoints from "../../components/UI/TrustPoints.astro";
 import { getCollection } from "astro:content";
 import { priceLabel, fromPrice, byOrder } from "../../utils/price";
 import { site } from "../../config/site";
 
 // Generate static paths for all tours
 export async function getStaticPaths() {
-  try {
-    const tourEntries = await getCollection("tours", ({ data }) => {
-      return import.meta.env.PROD ? !data.draft : true;
-    });
+  const tourEntries = await getCollection("tours", ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  });
 
-    return tourEntries.map(entry => ({
-      params: { slug: entry.slug },
-      props: { entry },
-    }));
-  } catch (error) {
-    // If the collection doesn't exist yet, return an empty array
-    return [];
-  }
+  return tourEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
 }
 
 // Get the tour data
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const tour = entry.data;
+const name = tour.shortTitle ?? tour.title;
 
 // Build TouristTrip structured data for this tour
 const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const tourSchema = {
   "@context": "https://schema.org",
   "@type": "TouristTrip",
-  name: entry.data.title,
-  description: entry.data.summary,
+  name: tour.title,
+  description: tour.summary,
   url: pageUrl,
-  image: entry.data.image ? new URL(entry.data.image, Astro.site).toString() : undefined,
+  image: tour.image ? new URL(tour.image, Astro.site).toString() : undefined,
   touristType: "Private group",
   provider: { "@id": `${site.url}/#business` },
-  offers: (entry.data.pricingTiers?.length ?? 0) > 1
+  offers: (tour.pricingTiers?.length ?? 0) > 1
     ? {
         "@type": "AggregateOffer",
         priceCurrency: "EUR",
-        lowPrice: Math.min(...entry.data.pricingTiers.map((t) => t.price)),
-        highPrice: Math.max(...entry.data.pricingTiers.map((t) => t.price)),
-        offerCount: entry.data.pricingTiers.length,
+        lowPrice: Math.min(...tour.pricingTiers!.map((t) => t.price)),
+        highPrice: Math.max(...tour.pricingTiers!.map((t) => t.price)),
+        offerCount: tour.pricingTiers!.length,
       }
     : {
         "@type": "Offer",
         priceCurrency: "EUR",
-        price: fromPrice(entry.data),
+        price: fromPrice(tour),
         url: pageUrl,
-        description: priceLabel(entry.data),
+        description: priceLabel(tour),
       },
 };
 
+const requestHref = `/contact/?tour=${entry.slug}`;
+const whatsappHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Hi Filip, I'm interested in the ${name} tour.`)}`;
 
-// Find related tours from the same tourType (if available)
-let relatedtours = [];
-if (entry.data.tourType) {
-  try {
-    const alltours = await getCollection("tours", ({ data }) => {
-      return import.meta.env.PROD ? !data.draft : true;
-    });
-    
-    relatedtours = alltours
-      .filter(tour => 
-        tour.data.tourType === entry.data.tourType && tour.slug !== entry.slug
-      )
-      .sort(byOrder)
-      .slice(0, 3);
-  } catch (error) {
-    console.log("Error fetching related tours");
-  }
-}
+// Other tours: same type first, then the rest, in display order
+const otherTours = (await getCollection("tours", ({ data }) => (import.meta.env.PROD ? !data.draft : true)))
+  .filter((t) => t.slug !== entry.slug)
+  .sort((a, b) => Number(b.data.tourType === tour.tourType) - Number(a.data.tourType === tour.tourType) || byOrder(a, b))
+  .slice(0, 3);
+
+const facts = [
+  { label: "Duration", value: tour.duration },
+  { label: "Meeting point", value: tour.meetingPoint },
+  { label: "Language", value: "English (or Czech)" },
+].filter((f) => f.value);
+
+const whatsappIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.05 21.5h-.01a9.43 9.43 0 01-4.8-1.32l-.35-.2-3.57.94.95-3.48-.22-.36a9.4 9.4 0 01-1.44-5.02c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.98 6.67 2.77a9.38 9.38 0 012.76 6.68c0 5.2-4.24 9.43-9.44 9.43zm8.03-17.47A11.3 11.3 0 0012.05.7C5.8.7.7 5.79.7 12.05c0 2 .52 3.95 1.52 5.67L.6 23.6l6.02-1.58a11.32 11.32 0 005.42 1.38h.01c6.26 0 11.35-5.09 11.36-11.35 0-3.03-1.18-5.89-3.33-8.03z"/></svg>`;
 ---
 
 <BaseLayout
-  title={`${entry.data.title} | ${site.name}`}
-  description={entry.data.summary || `${entry.data.title} – a private tour by ${site.name}, Prague.`}
-  image={entry.data.image ? { url: entry.data.image, alt: entry.data.title } : undefined}
+  title={`${tour.title} | ${site.name}`}
+  description={tour.summary || `${tour.title} – a private tour by ${site.name}, Prague.`}
+  image={tour.image ? { url: tour.image, alt: tour.title } : undefined}
   structuredData={[tourSchema]}
 >
-  <PostLayout
-    title={entry.data.shortTitle ?? entry.data.title}
-    description={entry.data.summary}
-    image={entry.data.image ? { url: entry.data.image, alt: entry.data.title } : undefined}
-    tags={entry.data.tags}
-    type="tour"
-  >
-    <!-- Tour Details -->
-    <div class="bg-gray-50 rounded-lg p-3 mb-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
-        {
-          entry.data.tourType && (
-            <div>
-              <h3 class="text-sm font-bold mb-0.5">Tour Type</h3>
-              <p class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-primary-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-                {entry.data.tourType}
-              </p>
-            </div>
-          )
-        }
+  <PageHeader title={name} subtitle={tour.summary} backgroundImage={tour.image} />
 
-        <div>
-          <h3 class="text-sm font-bold mb-0.5">Duration</h3>
-          <p class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-primary-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            {entry.data.duration}
-          </p>
-        </div>
+  <section class="section-y">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+        <!-- Booking box: first on phones, right-hand column on desktop -->
+        <aside class="lg:col-start-3 lg:row-start-1">
+          <div class="bg-white rounded-lg shadow-md p-6 lg:sticky lg:top-28">
+            <p class="text-2xl font-bold text-gray-900">€{fromPrice(tour)} per group</p>
+            <p class="text-gray-600">
+              {tour.pricingTiers?.length === 1 ? tour.pricingTiers[0].label : "depending on group size"}{tour.priceNote && `, ${tour.priceNote}`}
+            </p>
 
-        <div>
-          <h3 class="text-sm font-bold mb-0.5">Price</h3>
-          <p class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-primary-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.99 1.99 0 013 12V7a4 4 0 014-4z" />
-            </svg>
-            {priceLabel(entry.data)}
-          </p>
-        </div>
-
-        {
-          entry.data.meetingPoint && (
-            <div>
-              <h3 class="text-sm font-bold mb-0.5">Meeting Point</h3>
-              <p class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 mt-0.5 text-primary-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                {entry.data.meetingPoint}
-              </p>
-            </div>
-          )
-        }
-      </div>
-
-      {
-        entry.data.pricingTiers && entry.data.pricingTiers.length > 1 && (
-          <div class="mt-3 pt-3 border-t border-gray-200">
-            <h3 class="text-sm font-bold mb-1">Pricing (per group)</h3>
-            <ul class="space-y-0.5">
-              {entry.data.pricingTiers.map((tier) => (
-                <li class="flex justify-between max-w-xs">
-                  <span>{tier.label}</span>
-                  <span class="font-medium">€{tier.price}</span>
-                </li>
+            <dl class="mt-5 space-y-3">
+              {facts.map((f) => (
+                <div>
+                  <dt class="text-sm font-semibold text-gray-500">{f.label}</dt>
+                  <dd class="text-gray-800">{f.value}</dd>
+                </div>
               ))}
-            </ul>
-          </div>
-        )
-      }
+            </dl>
 
-      {
-        entry.data.priceIncludes && entry.data.priceIncludes.length > 0 && (
-          <div class="mt-3 pt-3 border-t border-gray-200">
-            <h3 class="text-sm font-bold mb-1">What's included</h3>
-            <ul class="space-y-1">
-              {entry.data.priceIncludes.map((item) => (
-                <li class="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 mt-0.5 text-primary-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
-    </div>
-
-    <!-- Video -->
-    {
-      entry.data.videoUrl && (
-        <div class="mb-4">
-          <h3 class="text-lg font-bold mb-2">Watch</h3>
-          <div class="relative w-full overflow-hidden rounded-lg" style="padding-top: 56.25%">
-            <iframe
-              class="absolute inset-0 h-full w-full"
-              src={entry.data.videoUrl}
-              title={`${entry.data.title} video`}
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            />
-          </div>
-        </div>
-      )
-    }
-
-    <!-- Tour Content -->
-    <article class="prose max-w-none prose-headings:text-gray-900 prose-headings:mt-4 prose-headings:mb-2 prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-h4:text-base prose-p:my-2 prose-p:text-gray-700 prose-ul:my-2 prose-li:my-0.5 prose-li:text-gray-700 prose-strong:text-gray-900 prose-a:text-primary-600 hover:prose-a:text-primary-700">
-      <Content />
-    </article>
-
-    <!-- Related tours -->
-    {
-      relatedtours.length > 0 && (
-        <div class="mt-6">
-          <h2 class="text-xl font-bold mb-3">More From This Series</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {relatedtours.map(tour => (
-              <a href={`/tours/${tour.slug}/`} class="block bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors">
-                <h3 class="font-bold mb-1">{tour.data.shortTitle ?? tour.data.title}</h3>
-                <p class="text-primary-600 text-sm font-medium">View tour →</p>
+            <div class="mt-6 flex flex-col gap-3">
+              <Button href={requestHref} class="w-full">Request this tour</Button>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 min-h-[44px] px-6 py-3 border-2 border-green-600 text-green-700 font-medium hover:bg-green-50 transition-colors"
+              >
+                <Fragment set:html={whatsappIcon} />
+                Ask on WhatsApp
               </a>
-            ))}
-          </div>
-        </div>
-      )
-    }
+            </div>
 
-    <!-- Action Buttons -->
-    <div class="mt-6 flex flex-wrap gap-2">
-      <Button href={`/contact/?tour=${entry.slug}`}>
-        Request this tour
-      </Button>
-      <Button href="/tours/" variant="outline">
-        Back to all tours
-      </Button>
+            <div class="mt-6 pt-6 border-t border-gray-100 text-sm">
+              <TrustPoints />
+            </div>
+
+            {tour.priceIncludes && tour.priceIncludes.length > 0 && (
+              <div class="mt-6 pt-6 border-t border-gray-100">
+                <h2 class="text-base md:text-base font-bold mb-2">What's included</h2>
+                <ul class="space-y-1 text-sm text-gray-700">
+                  {tour.priceIncludes.map((item) => (
+                    <li class="flex items-start">
+                      <span class="text-primary-600 mr-2" aria-hidden="true">✓</span>{item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </aside>
+
+        <!-- Tour description -->
+        <div class="lg:col-span-2 lg:row-start-1">
+          {tour.videoUrl && (
+            <div class="mb-6 relative w-full overflow-hidden rounded-lg" style="padding-top: 56.25%">
+              <iframe
+                class="absolute inset-0 h-full w-full"
+                src={tour.videoUrl}
+                title={`${name} video`}
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              />
+            </div>
+          )}
+
+          <article class="prose max-w-none prose-headings:text-gray-900 prose-headings:mt-6 prose-headings:mb-2 prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-700 prose-li:text-gray-700 prose-li:my-0.5 prose-strong:text-gray-900 prose-a:text-primary-600 hover:prose-a:text-primary-700">
+            <Content />
+          </article>
+        </div>
+      </div>
     </div>
-  </PostLayout>
+  </section>
+
+  <!-- Other tours -->
+  {otherTours.length > 0 && (
+    <section class="section-y bg-white">
+      <div class="container">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6">You might also like</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {otherTours.map((t) => (
+            <a href={`/tours/${t.slug}/`} class="block bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+              <h3 class="text-lg md:text-lg font-bold mb-1">{t.data.shortTitle ?? t.data.title}</h3>
+              <p class="text-sm text-gray-600 mb-2">{t.data.duration} · {priceLabel(t.data)}</p>
+              <p class="text-primary-600 text-sm font-medium">View tour →</p>
+            </a>
+          ))}
+        </div>
+        <div class="mt-6">
+          <Button href="/tours/" variant="outline">All tours</Button>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Sticky booking bar on phones -->
+  <div class="h-20 lg:hidden" aria-hidden="true"></div>
+  <div class="fixed bottom-0 inset-x-0 z-40 lg:hidden bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">
+    <div class="container flex items-center gap-3 py-3">
+      <div class="flex-grow leading-tight">
+        <p class="font-bold text-gray-900">€{fromPrice(tour)} per group</p>
+        <p class="text-xs text-gray-600">Pay after the tour</p>
+      </div>
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center w-11 h-11 border-2 border-green-600 text-green-700 rounded-md"
+        aria-label="Ask on WhatsApp"
+      >
+        <Fragment set:html={whatsappIcon} />
+      </a>
+      <a href={requestHref} class="inline-flex items-center justify-center h-11 px-5 rounded-md bg-primary-700 text-white font-medium hover:bg-primary-800">
+        Request
+      </a>
+    </div>
+  </div>
 </BaseLayout>

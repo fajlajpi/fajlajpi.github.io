@@ -30,7 +30,7 @@ This is not an easy place to visit, and it shouldn't be. But it is one of the mo
 
 ### Why we go by train
 
-We travel the way most of Theresienstadt's prisoners did: by rail from Prague. The journey itself is part of the history – the same landscape, the same approach. It also happens to be the practical choice: comfortable, reliable, and it means your guide is with you the entire day, not a driver waiting in a parking lot. I handle all tickets and connections; you just show up at the station. And because there's no private car to pay for, the day costs around half as much as the usual private car tours.
+We travel the way most of Theresienstadt's prisoners did: by rail from Prague. The journey itself is part of the history – the same landscape, the same approach. It also happens to be the practical choice: comfortable, reliable, and it means your guide is with you the entire day, not a driver waiting in a parking lot. I handle all tickets and connections; you just show up at the station. And because there's no private car to pay for, the day costs far less than the usual private car tours.
 
 ### The Small Fortress
 

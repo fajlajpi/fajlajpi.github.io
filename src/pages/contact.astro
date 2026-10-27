@@ -34,6 +34,7 @@ const tours = (await getCollection("tours", ({ data }) => !data.draft)).sort(byO
           
           <form
             id="booking-form"
+            data-email={site.email}
             action={site.formspreeEndpoint}
             method="POST"
             class="space-y-6"
@@ -129,6 +130,8 @@ const tours = (await getCollection("tours", ({ data }) => !data.draft)).sort(byO
                 Send request
               </Button>
             </div>
+
+            <p id="form-status" class="hidden rounded-md p-4" role="status" aria-live="polite"></p>
           </form>
         </div>
 
@@ -196,6 +199,32 @@ const tours = (await getCollection("tours", ({ data }) => !data.draft)).sort(byO
     const option = form.querySelector<HTMLOptionElement>(`option[data-slug="${CSS.escape(slug)}"]`);
     if (option) option.selected = true;
   }
+
+  // Send in the background and confirm on this page instead of Formspree's own page.
+  // Without JavaScript the form still posts normally.
+  const status = document.getElementById("form-status");
+  const showStatus = (text: string, ok: boolean) => {
+    if (!status) return;
+    status.textContent = text;
+    status.className = `rounded-md p-4 ${ok ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`;
+  };
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.currentTarget as HTMLFormElement;
+    const button = f.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (button) button.disabled = true;
+    try {
+      const res = await fetch(f.action, { method: "POST", body: new FormData(f), headers: { Accept: "application/json" } });
+      if (!res.ok) throw new Error(String(res.status));
+      f.reset();
+      showStatus("Thank you! Your request is on its way. I'll get back to you within 24 hours.", true);
+    } catch {
+      showStatus(`Sorry, something went wrong. Please email me at ${f.dataset.email} or message me on WhatsApp.`, false);
+    } finally {
+      if (button) button.disabled = false;
+    }
+  });
 
   // No past dates in the date picker
   const date = document.getElementById("date") as HTMLInputElement | null;

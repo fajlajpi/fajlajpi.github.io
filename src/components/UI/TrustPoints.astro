@@ -1,0 +1,32 @@
+---
+// The booking reassurances, shown on the home page and on every tour page.
+export interface Props {
+  layout?: "row" | "list";
+}
+
+const { layout = "list" } = Astro.props;
+
+const points = [
+  { title: "Pay after the tour", text: "Cash or card, nothing up front" },
+  { title: "Free cancellation", text: "Up to 24 hours before the tour" },
+  { title: "Quick reply", text: "I answer every request within 24 hours" },
+  { title: "Fully private", text: "Just your group and me" },
+];
+---
+
+<ul class:list={[
+  layout === "row" ? "grid grid-cols-2 lg:grid-cols-4 gap-4" : "space-y-2",
+]}>
+  {points.map((p) => (
+    <li class="flex items-start">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 mt-0.5 text-primary-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      <span>
+        <span class="font-semibold text-gray-900">{p.title}</span>
+        {layout === "row" ? <br /> : " · "}
+        <span class="text-gray-600">{p.text}</span>
+      </span>
+    </li>
+  ))}
+</ul>
