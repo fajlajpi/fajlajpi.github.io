@@ -2,11 +2,16 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/Sections/PageHeader.astro";
 import Button from "../components/UI/Button.astro";
+import { getCollection } from "astro:content";
+import { site, fullAddress } from "../config/site";
+import { priceLabel, byOrder } from "../utils/price";
+
+const tours = (await getCollection("tours", ({ data }) => !data.draft)).sort(byOrder);
 ---
 
 <BaseLayout
-  title="Book a Tour – Blue Fox Tours"
-  description="Request a private tour of Prague or a Theresienstadt day trip. I reply within 24 hours."
+  title={`Book a Tour | ${site.name}`}
+  description="Request a private tour of Prague or a Terezín day trip. I reply within 24 hours."
 >
   <PageHeader
     title="Book a Tour"
@@ -28,7 +33,8 @@ import Button from "../components/UI/Button.astro";
 
           
           <form
-            action="https://formspree.io/f/xjgqqgay"
+            id="booking-form"
+            action={site.formspreeEndpoint}
             method="POST"
             class="space-y-6"
           >
@@ -63,12 +69,11 @@ import Button from "../components/UI/Button.astro";
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
               >
                 <option value="">Please select</option>
-                <option value="Old Town, Jewish Quarter & Charles Bridge (3h private tour)">
-                  Old Town, Jewish Quarter &amp; Charles Bridge – 3h private tour
-                </option>
-                <option value="Theresienstadt by Train (full-day private trip)">
-                  Theresienstadt by Train – full-day private trip
-                </option>
+                {tours.map((tour) => (
+                  <option value={tour.data.title} data-slug={tour.slug}>
+                    {tour.data.shortTitle ?? tour.data.title} – {priceLabel(tour.data)}
+                  </option>
+                ))}
                 <option value="Custom / something else">
                   Custom tour / something else
                 </option>
@@ -140,8 +145,8 @@ import Button from "../components/UI/Button.astro";
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              <a href="mailto:info@bluefoxtours.cz" class="text-primary-600 hover:text-primary-700">
-                info@bluefoxtours.cz
+              <a href={`mailto:${site.email}`} class="text-primary-600 hover:text-primary-700">
+                {site.email}
               </a>
             </div>
           </div>
@@ -155,8 +160,8 @@ import Button from "../components/UI/Button.astro";
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              <a href="https://wa.me/420773537656" class="text-primary-600 hover:text-primary-700">
-                +420 773 537 656
+              <a href={`https://wa.me/${site.whatsapp}`} class="text-primary-600 hover:text-primary-700">
+                {site.phone}
               </a>
             </div>
           </div>
@@ -170,8 +175,29 @@ import Button from "../components/UI/Button.astro";
               <li>You pay after the tour – cash or card.</li>
             </ol>
           </div>
+
+          <div class="mt-6 text-sm text-gray-600">
+            <p class="font-semibold text-gray-800">{site.legalName}</p>
+            <p>IČO: {site.ico}</p>
+            <p>{fullAddress}</p>
+            <p class="italic">Office address only, not a meeting point.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Preselect the tour when arriving from a tour page (/contact/?tour=<slug>)
+  const form = document.getElementById("booking-form");
+  const slug = new URLSearchParams(window.location.search).get("tour");
+  if (form && slug) {
+    const option = form.querySelector<HTMLOptionElement>(`option[data-slug="${CSS.escape(slug)}"]`);
+    if (option) option.selected = true;
+  }
+
+  // No past dates in the date picker
+  const date = document.getElementById("date") as HTMLInputElement | null;
+  if (date) date.min = new Date().toISOString().slice(0, 10);
+</script>

@@ -1,5 +1,6 @@
 ---
-// Seo.astro — Blue Fox Tours
+// Seo.astro — Prague Fox Tours
+import { site } from "../../config/site";
 // NOTE: The original template used ${...} interpolation inside a plain
 // <script type="application/ld+json"> block. Astro does NOT interpolate
 // there, so the site was emitting literal "${churchInfo.name}" strings —
@@ -23,8 +24,8 @@ const {
   title,
   description,
   image = {
-    url: "/uploads/bluefox-thumb.png",
-    alt: "Blue Fox Tours",
+    url: "/uploads/og-default.jpg",
+    alt: site.name,
   },
   type = "website",
   canonicalUrl,
@@ -35,16 +36,14 @@ const canonicalURL = canonicalUrl || new URL(Astro.url.pathname, Astro.site);
 
 // ── Business info ────────────────────────────────────────────────────────
 // IMPORTANT: name / address / phone must match your Google Business Profile
-// EXACTLY (same spelling, same formatting). Fill in the TODOs before deploy.
+// EXACTLY (same spelling, same formatting). Values live in src/config/site.ts.
 const business = {
-  name: "Blue Fox Tours",
-  legalName: "Filip Huta",
-  addressLocality: "Prague",
-  addressCountry: "CZ",
-  telephone: "+420773537656",
-  email: "info@bluefoxtours.cz",
-  url: Astro.site?.toString() || "https://bluefoxtours.cz",
-  image: new URL(image.url, Astro.site).toString(),
+  name: site.name,
+  legalName: site.legalName,
+  telephone: site.phone.replace(/\s/g, ""),
+  email: site.email,
+  url: site.url,
+  image: new URL("/uploads/og-default.jpg", Astro.site).toString(),
   priceRange: "€€€",
 };
 
@@ -54,10 +53,19 @@ const business = {
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "TravelAgency"],
-  "@id": `${business.url}#business`,
+  "@id": `${business.url}/#business`,
   name: business.name,
-  description:
-    "Private walking tours of Prague and day trips to Theresienstadt (Terezín), led by a licensed local guide with 15 years of experience.",
+  legalName: business.legalName,
+  description: site.tagline,
+  taxID: site.ico,
+  logo: new URL("/android-chrome-512x512.png", Astro.site).toString(),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
   telephone: business.telephone,
   email: business.email,
   url: business.url,
@@ -69,7 +77,7 @@ const localBusinessSchema = {
   ],
   founder: {
     "@type": "Person",
-    name: "Filip Huta",
+    name: site.guide,
     jobTitle: "Licensed Tour Guide",
   },
   knowsLanguage: ["en", "cs"],
@@ -119,7 +127,7 @@ const allSchemas = [
 <meta property="og:image" content={new URL(image.url, Astro.site)} />
 <meta property="og:image:alt" content={image.alt} />
 <meta property="og:locale" content="en_US" />
-<meta property="og:site_name" content="Blue Fox Tours" />
+<meta property="og:site_name" content={site.name} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />

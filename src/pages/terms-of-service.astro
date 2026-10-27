@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/Sections/PageHeader.astro";
+import { site, fullAddress, phoneHref } from "../config/site";
 
 const lastUpdated = "12 July 2026";
 ---
 
 <BaseLayout
-  title="Terms of Service - Blue Fox Tours"
+  title={`Terms of Service | ${site.name}`}
   description="The terms that govern my guided tours"
 >
   <PageHeader
@@ -25,12 +26,12 @@ const lastUpdated = "12 July 2026";
           These terms govern the guided tour services provided by:
         </p>
         <p class="text-l text-gray-700 mb-6">
-          <strong>Filip Huta – Blue Fox Tours</strong><br />
-          Registered address: TODO_ADDRESS<br />
-          IČO (Business ID): TODO_ICO<br />
+          <strong>{site.legalName}</strong><br />
+          Registered address: {fullAddress}<br />
+          IČO (Business ID): {site.ico}<br />
           Licensed Prague tour guide (Tour Guide ID, class II)<br />
-          Email: <a href="mailto:info@bluefoxtours.cz" class="text-primary-600 hover:text-primary-700">info@bluefoxtours.cz</a>
-          | Phone: <a href="tel:+420773537656" class="text-primary-600 hover:text-primary-700">+420 773 537 656</a>
+          Email: <a href={`mailto:${site.email}`} class="text-primary-600 hover:text-primary-700">{site.email}</a>
+          | Phone: <a href={phoneHref} class="text-primary-600 hover:text-primary-700">{site.phone}</a>
         </p>
         <p class="text-l text-gray-700 mb-10">
           I provide <strong>guiding services only</strong>. I am not a travel agency or tour operator
@@ -45,8 +46,7 @@ const lastUpdated = "12 July 2026";
           All tours are private: your group and me. Each tour's page states its duration, route, what
           is included in the price, and what is not. Unless a tour page says otherwise, prices do
           <strong>not</strong> include food, drinks, transport fares, or admission fees. Prices are
-          quoted in EUR <strong>per group</strong>, not per person, according to the group-size tiers
-          on each tour page.
+          quoted in EUR <strong>per group</strong>, not per person, as stated on each tour page.
         </p>
         <p class="text-l text-gray-700 mb-10">
           Routes and content may be adjusted on the day for weather, closures, crowds, or your group's
@@ -70,8 +70,8 @@ const lastUpdated = "12 July 2026";
         <p class="text-l text-gray-700 mb-10">
           For direct bookings, payment is due at the end of the tour, in cash (CZK or EUR) or by card
           via SumUp (Visa, Mastercard, American Express, Apple Pay, Google Pay — see the Contact page
-          for the current list). For the Theresienstadt tour, admission fees are included in the price
-          and covered by me.
+          for the current list). For the Terezín tour, the Terezín Memorial admission and train fares are
+          not part of the tour price: you pay them at cost, directly to the Memorial and the carrier.
         </p>
 
         <h2 class="text-xl md:text-2xl font-bold mb-4">5. Cancellations and changes</h2>
@@ -138,8 +138,6 @@ const lastUpdated = "12 July 2026";
           <a href="https://www.coi.cz" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700">www.coi.cz</a>
           /
           <a href="https://adr.coi.cz" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700">adr.coi.cz</a>.
-          You may also use the EU online dispute resolution platform at
-          <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700">ec.europa.eu/consumers/odr</a>.
         </p>
 
         <h2 class="text-xl md:text-2xl font-bold mb-4">9. Governing law</h2>

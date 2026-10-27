@@ -1,30 +1,50 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/Sections/PageHeader.astro";
+import Button from "../components/UI/Button.astro";
+import { site } from "../config/site";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.guide,
+  jobTitle: "Licensed tour guide",
+  worksFor: { "@id": `${site.url}/#business` },
+  knowsLanguage: ["en", "cs"],
+};
 ---
 
 <BaseLayout
-  title="About - Blue Fox Tours"
-  description="Who we are and how we got here"
+  title={`About Filip, Your Prague Guide | ${site.name}`}
+  description="Filip Huta is a Prague native and licensed guide, guiding since 2010. His great-grandfather was a WWI legionnaire, and he was born in the year of the Velvet Revolution."
+  structuredData={[personSchema]}
 >
-  <PageHeader 
-    title="About Me" 
+  <PageHeader
+    title="About Me"
     subtitle="It's always better to know your guide. Get to know my background, qualifications and style."
     backgroundImage="/uploads/tours-header-bg.jpg"
   />
-  
+
   <section class="section-y">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <h2 class="text-xl md:text-2xl font-bold mb-6">Who am I?</h2>
           <p class="text-l text-gray-700 mb-8">
-            My name is Filip and I first started giving tours in 2010. Since then, I've led thousands of tours, mostly in Prague, but also in Kutná Hora, Terezín and Karlštejn.
+            My name is Filip Huta and I first started giving tours in 2010. Since then, I've led thousands of tours, mostly in Prague, but also in Kutná Hora, Terezín and Karlštejn.
+          </p>
+
+          <h2 class="text-xl md:text-2xl font-bold mb-6">Why the 20th century?</h2>
+          <p class="text-l text-gray-700 mb-4">
+            Because here, it's family history. My great-grandfather fought in the First World War as a Czechoslovak legionnaire, one of the men whose fight helped create Czechoslovakia in 1918. And I was a baby on 17 November 1989, when students marched down Národní třída and the Velvet Revolution began.
+          </p>
+          <p class="text-l text-gray-700 mb-8">
+            Everything that happened between those two dates shaped the city you'll walk through and the people you'll meet. I want you to leave understanding it, not just having seen it.
           </p>
 
           <h2 class="text-xl md:text-2xl font-bold mb-6">What to expect on my tours?</h2>
           <p class="text-l text-gray-700 mb-8">
-            I believe that a Tour Guide is an ambassador for their city and country. On my tours, I go beyond just showing you around. My goal is to help you understand our history, 
+            I believe that a Tour Guide is an ambassador for their city and country. On my tours, I go beyond just showing you around. My goal is to help you understand our history,
             culture and identity almost as if you actually lived here. My tours are story-oriented, factual and entertaining.
           </p>
           <p class="text-l text-gray-700 mb-8">
@@ -33,15 +53,19 @@ import PageHeader from "../components/Sections/PageHeader.astro";
 
           <h2 class="text-xl md:text-2xl font-bold mb-6">What are my qualifications?</h2>
           <p class="text-l text-gray-700 mb-8">
-            I have a Bachelor's Degree in Tourism, the official Tour Guide license, as well as official qualification as Tour Guide and Guide of Prague. 
+            I have a Bachelor's Degree in Tourism, the official Tour Guide license, as well as official qualification as Tour Guide and Guide of Prague.
             I do tours in English at a native level (C2), and in Czech.
           </p>
+
+          <Button href="/tours/">See my tours</Button>
         </div>
-        
+
         <div>
-          <img 
-            src="/uploads/about-guide.jpg" 
-            alt="Filip Tour Guide at Prague Castle" 
+          <img
+            src="/uploads/about-guide.jpg"
+            alt="Filip Huta guiding at Prague Castle"
+            width="1920"
+            height="1280"
             class="rounded-lg shadow-lg object-cover w-full h-full"
           />
         </div>

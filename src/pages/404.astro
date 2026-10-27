@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/UI/Button.astro";
+import { site } from "../config/site";
+---
+
+<BaseLayout title={`Page not found | ${site.name}`} description="This page doesn't exist.">
+  <section class="section-y">
+    <div class="container max-w-2xl text-center py-12">
+      <img src="/uploads/bluefox.png" alt="" width="960" height="540" class="w-48 mx-auto mb-8" />
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">This fox ran off</h1>
+      <p class="text-xl text-gray-700 mb-8">The page you're looking for doesn't exist, or it has moved.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <Button href="/">Home</Button>
+        <Button href="/tours/" variant="outline">See the tours</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

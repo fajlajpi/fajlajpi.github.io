@@ -1,15 +1,14 @@
 ---
 title: "Prague with Children Tour"
+shortTitle: "Prague with Children"
 date: 2026-07-01
 guide: "Filip H."
 tourType: "Family Tour"
 duration: "2 hours"
-price: 170
+price: 200
 pricingTiers:
-  - label: "1–4 people"
-    price: 170
-  - label: "5–6 people"
-    price: 190
+  - label: "1–6 people"
+    price: 200
 priceIncludes:
   - "Private licensed guide for your family only"
   - "Personalized route and pacing"
@@ -20,7 +19,8 @@ meetingPoint: "Křižovnické Square by the Charles Bridge, in front of the stat
 image: "/uploads/tours/childrens-tour.jpg"
 summary: "When travelling with children, most walking tours can fall on deaf ears. This tour was designed with children in mind, to help them enjoy their time in the city just as much as their parents might."
 tags: ["private tour", "children", "walking", "kampa", "charles bridge", "parks", "playgrounds", "mala strana"]
-draft: true
+order: 6
+draft: false
 ---
 
 ## Tour Overview
@@ -64,13 +64,6 @@ Recommended for children between ages 6 and 12. Includes activity sheets, colour
 
 ## Pricing
 
-Prices are **per group**, not per person:
+**€200 per group** of 1–6 people, not per person. Larger group? [Get in touch](/contact/) and we'll work something out.
 
-| Group size | Price |
-|------------|-------|
-| 1–4 people | €170 |
-| 5–6 people | €190 |
-
-Larger group? [Get in touch](/contact/) and we'll work something out.
-
-**[Request this tour →](/contact/)** I reply within 24 hours.
+**[Request this tour →](/contact/?tour=prague-with-children)** I reply within 24 hours.

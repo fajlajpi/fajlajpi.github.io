@@ -1,25 +1,24 @@
 ---
-title: "Theresienstadt (Terezín) by Train – Private Day Trip from Prague"
+title: "Terezín (Theresienstadt) Private Day Trip from Prague by Public Transport with a Licensed Guide"
+shortTitle: "Terezín Day Trip by Train"
 date: 2026-07-08
 guide: "Filip H."
 tourType: "Twentieth Century"
 duration: "Full day (approx. 8 hours door to door)"
-price: 260
+price: 360
+priceNote: "+ admission and train fares at cost"
 pricingTiers:
-  - label: "1–2 people"
-    price: 260
-  - label: "3–4 people"
-    price: 300
-  - label: "5–6 people"
-    price: 340
+  - label: "1–6 people"
+    price: 360
 priceIncludes:
   - "Private licensed guide for the full day"
-  - "All admissions (Small Fortress, Ghetto Museum, Magdeburg Barracks)"
+  - "Booking of the Terezín Memorial guide for the Small Fortress"
   - "Guidance through tickets and public transport connections"
 meetingPoint: "Prague Main Train Station main hall, under the departures board"
 image: "/uploads/tours/theresienstadt.jpg"
 summary: "A private, full-day visit to the former Theresienstadt Ghetto and the Small Fortress – a place that was simultaneously a Gestapo prison, a transit camp of the Holocaust, and a propaganda stage set. We travel by train, the way most of its prisoners arrived."
 tags: ["day trip", "private tour", "20th century", "world war two", "terezín"]
+order: 3
 draft: false
 ---
 
@@ -31,7 +30,11 @@ This is not an easy place to visit, and it shouldn't be. But it is one of the mo
 
 ### Why we go by train
 
-We travel the way most of Theresienstadt's prisoners did: by rail from Prague. The journey itself is part of the history – the same landscape, the same approach. It also happens to be the practical choice: comfortable, reliable, and it means your guide is with you the entire day, not a driver waiting in a parking lot. I handle all tickets and connections; you just show up at the station.
+We travel the way most of Theresienstadt's prisoners did: by rail from Prague. The journey itself is part of the history – the same landscape, the same approach. It also happens to be the practical choice: comfortable, reliable, and it means your guide is with you the entire day, not a driver waiting in a parking lot. I handle all tickets and connections; you just show up at the station. And because there's no private car to pay for, the day costs around half as much as the usual private car tours.
+
+### The Small Fortress
+
+Only guides authorised by the Terezín Memorial may guide inside the Small Fortress. That part of the day is a Small Fortress tour led by a Memorial guide (included in the admission). I book it in advance, come with you, and add context before and after. I guide you everywhere else.
 
 ### Sites visited
 
@@ -57,16 +60,11 @@ We travel the way most of Theresienstadt's prisoners did: by rail from Prague. T
 - Full-day trip; wear comfortable shoes and dress for the weather
 - We take breaks, including lunch (own expense) – I know the decent options
 - Recommended for ages 12 and up; I'll gladly advise if you're unsure
-- All admissions are included in the price
+- Terezín Memorial admission is paid on site, by cash or card, at cost: 310 CZK per adult, 240 CZK reduced, 630 CZK family ticket
+- Train fares are paid at cost; I help you buy the right tickets
 
 ## Pricing
 
-Prices are **per group**, not per person, with all admissions included:
+**€360 per group** of 1–6 people, not per person, plus admission and train fares at cost. Larger group? [Get in touch](/contact/) and we'll work something out.
 
-| Group size | Price |
-|------------|-------|
-| 1–2 people | €260 |
-| 3–4 people | €300 |
-| 5–6 people | €340 |
-
-**[Request this tour →](/contact/)** I reply within 24 hours.
+**[Request this tour →](/contact/?tour=terezin-day-trip)** I reply within 24 hours.

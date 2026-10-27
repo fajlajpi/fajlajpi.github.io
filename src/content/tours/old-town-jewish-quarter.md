@@ -1,17 +1,14 @@
 ---
 title: "Prague Old Town, Jewish Quarter & Charles Bridge – Private Walking Tour"
+shortTitle: "Old Town, Jewish Quarter & Charles Bridge"
 date: 2026-07-08
 guide: "Filip H."
 tourType: "Prague Essentials"
 duration: "3 hours"
-price: 150
+price: 200
 pricingTiers:
-  - label: "1–2 people"
-    price: 150
-  - label: "3–4 people"
-    price: 190
-  - label: "5–6 people"
-    price: 220
+  - label: "1–6 people"
+    price: 200
 priceIncludes:
   - "Private licensed guide for your group only"
   - "Personalized route and pacing"
@@ -20,6 +17,7 @@ meetingPoint: "Old Town Square, corner of Pařížská, in front of Cartier"
 image: "/uploads/tours/old-town-jewish-quarter.jpg"
 summary: "The heart of Prague in three hours, privately, with a guide who was born here. Old Town, the Jewish Quarter, and Charles Bridge – history, stories, and the practical tips that make the rest of your trip better."
 tags: ["private tour", "walking", "old town", "jewish quarter", "charles bridge"]
+order: 5
 draft: false
 ---
 
@@ -54,14 +52,6 @@ I was born in Prague, and I've been guiding here since 2010. You'll get the hist
 
 ## Pricing
 
-Prices are **per group**, not per person:
+**€200 per group** of 1–6 people, not per person. Larger group? [Get in touch](/contact/) and we'll work something out.
 
-| Group size | Price |
-|------------|-------|
-| 1–2 people | €150 |
-| 3–4 people | €190 |
-| 5–6 people | €220 |
-
-Larger group? [Get in touch](/contact/) and we'll work something out.
-
-**[Request this tour →](/contact/)** I reply within 24 hours.
+**[Request this tour →](/contact/?tour=old-town-jewish-quarter)** I reply within 24 hours.

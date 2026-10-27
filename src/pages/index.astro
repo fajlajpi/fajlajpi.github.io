@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSection from "../components/Sections/HeroSection.astro";
-import EventList from "../components/Sections/EventList.astro";
 import TourList from "../components/Sections/TourList.astro";
 import Button from "../components/UI/Button.astro";
 import CTASection from "../components/Sections/CTASection.astro";
@@ -10,13 +9,13 @@ import CTASection from "../components/Sections/CTASection.astro";
 
 <BaseLayout>
   <HeroSection 
-    title="Know Prague like an old friend"
-    subtitle="Experience the Golden City, see its hidden gems, and enjoy storytelling that brings history to life"
+    title="Prague's 20th century, told by a native guide"
+    subtitle="Private tours of communist and wartime Prague, Prague Castle and Terezín, with a licensed local whose family lived through it all."
     backgroundImage="/uploads/hero-prg.jpg"
     ctaText="Look at tours"
     ctaLink="/tours/"
-    secondaryCtaText="Read about Prague"
-    secondaryCtaLink="/blog/"
+    secondaryCtaText="About your guide"
+    secondaryCtaLink="/about/"
   />
   
   <!-- Blue Fox Explanation & Quote -->
@@ -43,7 +42,10 @@ import CTASection from "../components/Sections/CTASection.astro";
         <div>
           <img 
             src="/uploads/about-guide.jpg" 
-            alt="Tour Guide in Action" 
+            alt="Filip Huta guiding at Prague Castle"
+            width="1920"
+            height="1280"
+            loading="lazy" 
             class="rounded-lg shadow-lg object-cover w-full h-full"
           />
         </div>
@@ -51,7 +53,7 @@ import CTASection from "../components/Sections/CTASection.astro";
         <div>
           <h2 class="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
           <p class="text-gray-700 mb-6 text-lg">
-            I am a Prague native with 15 years of experience as a tour guide, but my love for Prague and our history goes back way further. I'm proud to be able to share it with people from all over the world!
+            I am a Prague native with 15 years of experience as a tour guide, but my love for Prague and our history goes back way further. My great-grandfather fought in the First World War as a Czechoslovak legionnaire, and I was a baby when the Velvet Revolution began on 17 November 1989. Here, the 20th century is family history.
           </p>
           <p class="text-gray-700 mb-8 text-lg">
             My tours are entertaining, factual, and with a story thread running through them. My aim is to help you know the city through and through using our stories, legends, culture and traditions.

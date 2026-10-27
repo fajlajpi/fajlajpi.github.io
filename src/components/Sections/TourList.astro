@@ -2,55 +2,42 @@
 import { getCollection } from "astro:content";
 import Card from "../UI/Card.astro";
 import Button from "../UI/Button.astro";
+import { priceLabel, byOrder } from "../../utils/price";
 
 export interface Props {
   count?: number;
   showViewAll?: boolean;
 }
 
-const { count = 3, showViewAll = true } = Astro.props;
+const { count = 4, showViewAll = true } = Astro.props;
 
-// Get tours sorted by date (newest first)
 const allTours = await getCollection("tours", ({ data }) => {
   return import.meta.env.PROD ? !data.draft : true;
 });
 
-// Sort by date (newest first)
-const tours = allTours
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .slice(0, count);
-
-// Cheapest pricing tier for a tour, falling back to the `from` price.
-const cheapestTier = (data: (typeof tours)[number]["data"]) => {
-  const tiers = data.pricingTiers;
-  if (tiers && tiers.length > 0) {
-    return tiers.reduce((min, tier) => (tier.price < min.price ? tier : min));
-  }
-  return { label: null as string | null, price: data.price };
-};
+const tours = allTours.sort(byOrder).slice(0, count);
 ---
 
 <section class="section-y bg-white">
   <div class="container">
     <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Selected tours</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Private tours</h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        A selection of the tours on offer.
+        From Prague Castle to the Velvet Revolution, on the streets where it happened.
       </p>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {tours.map((tour) => {
-        const tier = cheapestTier(tour.data);
         return (
         <Card
           class="shadow-none"
-          title={tour.data.title}
+          title={tour.data.shortTitle ?? tour.data.title}
           image={{
             src: tour.data.image || "/images/tour-placeholder.webp",
             alt: tour.data.title
           }}
-          href={`/tours/${tour.slug}`}
+          href={`/tours/${tour.slug}/`}
         >
           <div class="mb-3 flex items-center text-gray-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -63,7 +50,7 @@ const cheapestTier = (data: (typeof tours)[number]["data"]) => {
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
             </svg>
-            <span>From €{tier.price}{tier.label && ` (${tier.label})`}</span>
+            <span>{priceLabel(tour.data)}</span>
           </div>
 
           <p class="text-gray-700 mb-4">{tour.data.summary}</p>
@@ -79,8 +66,8 @@ const cheapestTier = (data: (typeof tours)[number]["data"]) => {
     
     {showViewAll && tours.length > 0 && (
       <div class="mt-12 text-center">
-        <Button href="/tours" variant="outline">
-          View All tours
+        <Button href="/tours/" variant="outline">
+          All tours, including family and Old Town tours
         </Button>
       </div>
     )}

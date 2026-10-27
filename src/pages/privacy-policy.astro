@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/Sections/PageHeader.astro";
+import { site, fullAddress, phoneHref } from "../config/site";
 
 const lastUpdated = "12 July 2026";
 ---
 
 <BaseLayout
-  title="Privacy Policy - Blue Fox Tours"
+  title={`Privacy Policy | ${site.name}`}
   description="How I handle your personal data"
 >
   <PageHeader
@@ -28,11 +29,11 @@ const lastUpdated = "12 July 2026";
         <h2 class="text-xl md:text-2xl font-bold mb-4">1. Who is responsible for your data</h2>
         <p class="text-l text-gray-700 mb-2">The data controller is:</p>
         <p class="text-l text-gray-700 mb-10">
-          <strong>Filip Huta – Blue Fox Tours</strong><br />
-          Registered address: TODO_ADDRESS<br />
-          IČO (Business ID): TODO_ICO<br />
-          Email: <a href="mailto:info@bluefoxtours.cz" class="text-primary-600 hover:text-primary-700">info@bluefoxtours.cz</a><br />
-          Phone: <a href="tel:+420773537656" class="text-primary-600 hover:text-primary-700">+420 773 537 656</a>
+          <strong>{site.legalName}</strong><br />
+          Registered address: {fullAddress}<br />
+          IČO (Business ID): {site.ico}<br />
+          Email: <a href={`mailto:${site.email}`} class="text-primary-600 hover:text-primary-700">{site.email}</a><br />
+          Phone: <a href={phoneHref} class="text-primary-600 hover:text-primary-700">{site.phone}</a>
         </p>
 
         <h2 class="text-xl md:text-2xl font-bold mb-4">2. What data I collect and why</h2>
@@ -98,8 +99,9 @@ const lastUpdated = "12 July 2026";
 
         <h2 class="text-xl md:text-2xl font-bold mb-4">5. Cookies</h2>
         <p class="text-l text-gray-700 mb-10">
-          This website sets no tracking or analytics cookies and uses no advertising technology. There
-          is nothing to consent to, which is why you don't see a cookie banner.
+          This website sets no tracking or analytics cookies and uses no advertising technology. Fonts
+          are served from this website itself, not from third parties. There is nothing to consent to,
+          which is why you don't see a cookie banner.
         </p>
 
         <h2 class="text-xl md:text-2xl font-bold mb-4">6. Your rights</h2>
@@ -107,7 +109,7 @@ const lastUpdated = "12 July 2026";
           Under the GDPR you have the right to access your data, correct it, have it erased, restrict
           its processing, object to processing, receive it in a portable format, and withdraw any
           consent you've given. To exercise any of these, just email me at
-          <a href="mailto:info@bluefoxtours.cz" class="text-primary-600 hover:text-primary-700">info@bluefoxtours.cz</a>
+          <a href={`mailto:${site.email}`} class="text-primary-600 hover:text-primary-700">{site.email}</a>
           — I'm the only person who will handle your request, and I'll respond within one month.
         </p>
         <p class="text-l text-gray-700 mb-10">

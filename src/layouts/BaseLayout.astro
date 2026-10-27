@@ -1,8 +1,14 @@
 ---
+import "@fontsource/playfair-display/400.css";
+import "@fontsource/playfair-display/700.css";
+import "@fontsource/source-sans-3/400.css";
+import "@fontsource/source-sans-3/400-italic.css";
+import "@fontsource/source-sans-3/600.css";
 import "../assets/styles/global.css";
 import Seo from "../components/UI/Seo.astro";
 import Header from "../components/Global/Header.astro";
 import Footer from "../components/Global/Footer.astro";
+import { site } from "../config/site";
 
 export interface Props {
   title?: string;
@@ -18,11 +24,11 @@ export interface Props {
 }
 
 const {
-  title = "Blue Fox Tours – Private Prague Tours with a Local Guide",
-  description = "Private walking tours of Prague that make you feel like you've lived here your whole life. Led by a licensed local guide, born and raised in Prague.",
+  title = `${site.name} – Private Tours of Prague's 20th Century`,
+  description = "Private tours of communist and WWII Prague, Prague Castle and Terezín, with a native, licensed guide whose family lived through it all.",
   image = {
-    url: "/uploads/bluefox-thumb.png",
-    alt: "Blue Fox Tours",
+    url: "/uploads/og-default.jpg",
+    alt: site.name,
   },
   type = "website",
   canonicalUrl,
@@ -35,7 +41,8 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <meta name="theme-color" content="#1948aa" />
     <meta name="generator" content={Astro.generator} />
 
     <Seo

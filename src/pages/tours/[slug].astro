@@ -3,6 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostLayout from "../../layouts/PostLayout.astro";
 import Button from "../../components/UI/Button.astro";
 import { getCollection } from "astro:content";
+import { priceLabel, fromPrice, byOrder } from "../../utils/price";
+import { site } from "../../config/site";
 
 // Generate static paths for all tours
 export async function getStaticPaths() {
@@ -26,16 +28,17 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 // Build TouristTrip structured data for this tour
-const siteUrl = Astro.site?.toString() || "https://bluefoxtours.cz";
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const tourSchema = {
   "@context": "https://schema.org",
   "@type": "TouristTrip",
   name: entry.data.title,
   description: entry.data.summary,
+  url: pageUrl,
   image: entry.data.image ? new URL(entry.data.image, Astro.site).toString() : undefined,
   touristType: "Private group",
-  provider: { "@id": `${siteUrl}#business` },
-  offers: entry.data.pricingTiers?.length
+  provider: { "@id": `${site.url}/#business` },
+  offers: (entry.data.pricingTiers?.length ?? 0) > 1
     ? {
         "@type": "AggregateOffer",
         priceCurrency: "EUR",
@@ -46,14 +49,12 @@ const tourSchema = {
     : {
         "@type": "Offer",
         priceCurrency: "EUR",
-        price: entry.data.price,
+        price: fromPrice(entry.data),
+        url: pageUrl,
+        description: priceLabel(entry.data),
       },
 };
 
-// "From" price for display (lowest tier, or the flat price)
-const fromPrice = entry.data.pricingTiers?.length
-  ? Math.min(...entry.data.pricingTiers.map((t) => t.price))
-  : entry.data.price;
 
 // Find related tours from the same tourType (if available)
 let relatedtours = [];
@@ -67,7 +68,7 @@ if (entry.data.tourType) {
       .filter(tour => 
         tour.data.tourType === entry.data.tourType && tour.slug !== entry.slug
       )
-      .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+      .sort(byOrder)
       .slice(0, 3);
   } catch (error) {
     console.log("Error fetching related tours");
@@ -76,13 +77,13 @@ if (entry.data.tourType) {
 ---
 
 <BaseLayout
-  title={`${entry.data.title} - Tours - Blue Fox Tours`}
-  description={entry.data.summary || `${entry.data.title} – a private tour by Blue Fox Tours, Prague.`}  image={entry.data.image ? { url: entry.data.image, alt: entry.data.title } : undefined}
-  type="article"
+  title={`${entry.data.title} | ${site.name}`}
+  description={entry.data.summary || `${entry.data.title} – a private tour by ${site.name}, Prague.`}
+  image={entry.data.image ? { url: entry.data.image, alt: entry.data.title } : undefined}
   structuredData={[tourSchema]}
 >
   <PostLayout
-    title={entry.data.title}
+    title={entry.data.shortTitle ?? entry.data.title}
     description={entry.data.summary}
     image={entry.data.image ? { url: entry.data.image, alt: entry.data.title } : undefined}
     tags={entry.data.tags}
@@ -121,7 +122,7 @@ if (entry.data.tourType) {
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-primary-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.99 1.99 0 013 12V7a4 4 0 014-4z" />
             </svg>
-            From €{fromPrice} per group
+            {priceLabel(entry.data)}
           </p>
         </div>
 
@@ -142,7 +143,7 @@ if (entry.data.tourType) {
       </div>
 
       {
-        entry.data.pricingTiers && entry.data.pricingTiers.length > 0 && (
+        entry.data.pricingTiers && entry.data.pricingTiers.length > 1 && (
           <div class="mt-3 pt-3 border-t border-gray-200">
             <h3 class="text-sm font-bold mb-1">Pricing (per group)</h3>
             <ul class="space-y-0.5">
@@ -207,8 +208,8 @@ if (entry.data.tourType) {
           <h2 class="text-xl font-bold mb-3">More From This Series</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             {relatedtours.map(tour => (
-              <a href={`/tours/${tour.slug}`} class="block bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors">
-                <h3 class="font-bold mb-1">{tour.data.title}</h3>
+              <a href={`/tours/${tour.slug}/`} class="block bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors">
+                <h3 class="font-bold mb-1">{tour.data.shortTitle ?? tour.data.title}</h3>
                 <p class="text-primary-600 text-sm font-medium">View tour →</p>
               </a>
             ))}
@@ -219,17 +220,12 @@ if (entry.data.tourType) {
 
     <!-- Action Buttons -->
     <div class="mt-6 flex flex-wrap gap-2">
-      <Button href="/tours" variant="outline">
-        Back to All tours
+      <Button href={`/contact/?tour=${entry.slug}`}>
+        Request this tour
       </Button>
-
-      {
-        entry.data.series && (
-          <Button href={`/tours?tourType=${encodeURIComponent(entry.data.tourType)}`} variant="outline">
-            View All in This Series
-          </Button>
-        )
-      }
+      <Button href="/tours/" variant="outline">
+        Back to all tours
+      </Button>
     </div>
   </PostLayout>
 </BaseLayout>

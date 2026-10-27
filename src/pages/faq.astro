@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/Sections/PageHeader.astro";
+import Button from "../components/UI/Button.astro";
+import { site } from "../config/site";
+
+// Plain-text answers, so they can also be used in the FAQPage structured data.
+const faqs = [
+  {
+    q: "Are the tours private?",
+    a: "Yes. Every tour is private: just you, your travel companions and me. No strangers join your group, and we go at your pace.",
+  },
+  {
+    q: "How much does a tour cost?",
+    a: "Walking tours in Prague cost €200 per group of 1–6 people. The Terezín day trip costs €360 per group, plus the Memorial admission and train fares, which you pay at cost. Prices are per group, not per person.",
+  },
+  {
+    q: "We are more than six people. Can you still guide us?",
+    a: "Usually, yes. Send me a request with the size of your group and I'll suggest the best option.",
+  },
+  {
+    q: "How do I book?",
+    a: "Send a request through the contact form, by email or on WhatsApp, with the tour, the date and the size of your group. I reply within 24 hours to confirm availability and the details. Your booking is confirmed once I confirm it in writing.",
+  },
+  {
+    q: "How and when do I pay?",
+    a: "For direct bookings, you pay at the end of the tour, in cash (CZK or EUR) or by card. No payment is taken in advance.",
+  },
+  {
+    q: "What is the cancellation policy?",
+    a: "You can cancel or reschedule free of charge up to 24 hours before the tour. For cancellations later than that, and for no-shows, I may charge the full price. If I ever have to cancel, you'll be offered a new date or a full refund of anything you've paid.",
+  },
+  {
+    q: "Where do we meet?",
+    a: "Each tour page lists its meeting point, and I confirm it again when you book. If you'd prefer to start somewhere else, just ask.",
+  },
+  {
+    q: "What happens if it rains?",
+    a: "Tours run rain or shine, so please dress for the weather. In bad weather I can add indoor stops along the way.",
+  },
+  {
+    q: "Are the tours suitable for children?",
+    a: "Yes. The Prague with Children tour is designed for families with children aged about 6 to 12, and children are welcome on the Old Town and Castle tours too. The 20th-century tours suit teenagers and adults best, and Terezín is recommended for ages 12 and up.",
+  },
+  {
+    q: "Are the tours accessible?",
+    a: "Prague's historic centre has a lot of cobblestones, some steps and a few hills. Tell me about any mobility needs when you get in touch, and I'll adapt the route where possible.",
+  },
+  {
+    q: "Why do you go to Terezín by public transport?",
+    a: "We take the train, the way most of Theresienstadt's prisoners arrived. The journey becomes part of the story, I'm with you the whole day, and without a private car the trip costs around half as much as the usual private car tours.",
+  },
+  {
+    q: "Will you guide us inside the Small Fortress in Terezín?",
+    a: "Only guides authorised by the Terezín Memorial may guide inside the Small Fortress. That part of the visit is led by a Memorial guide, which is included in the admission. I book it in advance, come with you and add context. I guide you everywhere else.",
+  },
+  {
+    q: "Which languages do you guide in?",
+    a: "English (native level, C2) and Czech.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={`Frequently Asked Questions | ${site.name}`}
+  description="Prices, booking, payment, cancellation, meeting points and Terezín logistics for private tours with Prague Fox Tours."
+  structuredData={[faqSchema]}
+>
+  <PageHeader
+    title="Frequently Asked Questions"
+    subtitle="Everything you need to know before your tour."
+    backgroundImage="/uploads/tours-header-bg.jpg"
+  />
+
+  <section class="section-y">
+    <div class="container">
+      <div class="max-w-3xl mx-auto space-y-4">
+        {faqs.map((f) => (
+          <details class="bg-white rounded-lg shadow-sm">
+            <summary class="flex items-center justify-between cursor-pointer list-none p-6 text-lg font-semibold text-gray-900">
+              {f.q}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-4 flex-shrink-0 text-primary-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </summary>
+            <p class="px-6 pb-6 text-gray-700">{f.a}</p>
+          </details>
+        ))}
+
+        <div class="pt-8 text-center">
+          <p class="text-lg text-gray-700 mb-4">Didn't find your answer?</p>
+          <Button href="/contact/">Get in touch</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
